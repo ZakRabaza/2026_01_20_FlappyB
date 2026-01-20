@@ -14,7 +14,11 @@ public class PipeController : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter2D(Collision2D coll)
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Bird Dead RIP");
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Bird Dead RIP");
     }
