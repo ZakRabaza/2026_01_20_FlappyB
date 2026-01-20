@@ -24,6 +24,7 @@ public class BirdController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Camera _camera;
     private Transform _transform;
+    private Animator _animator;
 
     void Start()
     {
@@ -45,10 +46,12 @@ public class BirdController : MonoBehaviour
 
         _camera = Camera.main;
         _transform = transform;
+        _animator = GetComponent<Animator>();
     }
 
     void Jump() { 
         _rigidbody.AddForce(Vector2.up * _jumpImpulse, ForceMode2D.Impulse);
+        _animator.SetTrigger("Flap");
     }
 
     void HandleInput()
