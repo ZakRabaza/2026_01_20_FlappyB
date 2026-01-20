@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
+    [Header("Background Settings")]
+
+    [Range(1f, 10f)]
     [SerializeField]
     [Tooltip("This is the move speed of the background")]
     private float _moveSpeed = 2f;
