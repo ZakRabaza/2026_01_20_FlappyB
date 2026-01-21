@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +25,8 @@ public class BirdController : MonoBehaviour
     private Camera _camera;
     private Transform _transform;
     private Animator _animator;
+
+    private bool _isDead = false;
 
     void Start()
     {
@@ -70,5 +72,17 @@ public class BirdController : MonoBehaviour
 
     void LimitVelocity() {
         _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, Mathf.Clamp(_rigidbody.linearVelocity.y, _negativeVelocity, _positiveVelocity));
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision) 
+    { 
+        if (_isDead) return; 
+        if (collision.collider.CompareTag("Pipe")) 
+        { 
+            _isDead = true; 
+            Debug.Log("Bird hit a pipe → DEAD"); 
+            GameManager.Instance.GameOver(); 
+        } 
     }
 }
