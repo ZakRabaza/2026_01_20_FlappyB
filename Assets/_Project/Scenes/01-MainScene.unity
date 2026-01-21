@@ -517,7 +517,7 @@ Transform:
   m_GameObject: {fileID: 911504718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -30.42, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -539,9 +539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeController
   _moveSpeed: 2
-  gap: 4
-  minCenterY: -7
-  maxCenterY: 7
+  _gap: 4
+  _minCenterY: -6
+  _maxCenterY: 6
 --- !u!1 &981136057
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,9 +783,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeController
   _moveSpeed: 2
-  gap: 4
-  minCenterY: -2
-  maxCenterY: 2
+  _gap: 4
+  _minCenterY: -6
+  _maxCenterY: 6
 --- !u!1 &1245016620
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,6 +960,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1291396439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1291396441}
+  - component: {fileID: 1291396440}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1291396440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291396439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfe9a046b955744e93c0160f4fdc7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PipePool
+  _pipePrefab: {fileID: 911504718}
+  _poolSize: 10
+  _spawnInterval: 4
+  _spawnX: 10
+--- !u!4 &1291396441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291396439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2978, y: 1.05638, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746401696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1143,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!58 &1746401701
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1615,3 +1663,4 @@ SceneRoots:
   - {fileID: 1786427006}
   - {fileID: 982193030}
   - {fileID: 911504719}
+  - {fileID: 1291396441}
