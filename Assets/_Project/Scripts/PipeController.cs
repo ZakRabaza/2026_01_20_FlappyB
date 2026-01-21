@@ -15,48 +15,38 @@ public class PipeController : MonoBehaviour
 
     [Tooltip("This is the minimum height of center between the pipe , space included")]
     [SerializeField] 
-    private float minCenterY = -6f;
+    private float _minCenterY = -6f;
 
     [Tooltip("This is the maximum height of center between the pipe , space included")]
     [SerializeField] 
-    private float maxCenterY = 6f;
+    private float _maxCenterY = 6f;
 
     private Transform _pipeUp;
     private Transform _pipeDown;
 
-    void Start()
-    {
-        SetInitPositions();
-    }
-
+  
     void Update()
     {
         MovePipe();
     }
 
-    void SetInitPositions()
+    public void Init()
     {
         _pipeUp = transform.Find("PipeUp");
         _pipeDown = transform.Find("PipeDown");
-
-        _pipeUp.localPosition = new Vector2(0, -2f);
-        _pipeDown.localPosition = new Vector2(0, 2f);    
     }
 
     void MovePipe()
-{
-        Vector2 translation = _moveSpeed * Time.deltaTime * Vector2.left;
-        if (transform.position.x > -16)
-            transform.Translate(translation);
-        else
-        {
-            transform.position = Vector2.zero;
-            EditPipeAttributes();
-        }
-    }
-    void EditPipeAttributes()
     {
-        float centerY = Random.Range(minCenterY, maxCenterY);
+        Vector2 translation = _moveSpeed * Time.deltaTime * Vector2.left;
+        transform.Translate(translation);
+
+        if (transform.position.x < -16f) 
+            gameObject.SetActive(false);
+    }
+    public void EditPipeAttributes()
+    {
+        float centerY = Random.Range(_minCenterY, _maxCenterY);
     
         _pipeUp.localPosition = new Vector2(0, centerY - _gap / 2f);
         _pipeDown.localPosition = new Vector2(0, centerY + _gap / 2f);
