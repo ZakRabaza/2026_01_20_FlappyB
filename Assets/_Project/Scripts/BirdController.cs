@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public class BirdController : MonoBehaviour
 {
@@ -39,7 +38,6 @@ public class BirdController : MonoBehaviour
   
     void Update()
     {
-        HandleInput();
         HandleOutOfCamera();
         LimitVelocity();
     }
@@ -60,12 +58,6 @@ public class BirdController : MonoBehaviour
         _animator.SetTrigger("Flap");
     }
 
-    void HandleInput()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            Jump();
-    }
-
     void HandleOutOfCamera()
     {
         Vector3 position = _transform.position;
@@ -78,7 +70,13 @@ public class BirdController : MonoBehaviour
     }
 
     void LimitVelocity() {
-        _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, Mathf.Clamp(_rigidbody.linearVelocity.y, _negativeVelocity, _positiveVelocity));
+        _rigidbody.linearVelocity = new Vector2(
+            _rigidbody.linearVelocity.x, 
+            Mathf.Clamp(_rigidbody.linearVelocity.y, 
+            _negativeVelocity, 
+            _positiveVelocity
+            )
+        );
     }
 
 
@@ -100,4 +98,12 @@ public class BirdController : MonoBehaviour
             Score?.Invoke();
         }
     }
+
+    public void OnJumpInput(InputAction.CallbackContext _context) 
+    { 
+        if (!_context.started) 
+            return; 
+        Jump(); 
+    }
+    //To Do escape to pause
 }
