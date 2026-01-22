@@ -4,8 +4,8 @@ public class BackgroundController : MonoBehaviour
 {
     [Header("Background Settings")]
 
-    [Range(1f, 10f)]
     [SerializeField]
+    [Range(1f, 10f)]
     [Tooltip("This is the move speed of the background")]
     private float _moveSpeed = 2f;
 
