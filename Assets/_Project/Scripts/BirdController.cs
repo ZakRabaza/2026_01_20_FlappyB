@@ -1,23 +1,24 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class BirdController : MonoBehaviour
 {
     [Header("Bird Settings")]
 
-    [Range(1f, 10f)]
     [SerializeField]
+    [Range(1f, 10f)]
     [Tooltip("This is the jump impulse")]
     private float _jumpImpulse = 5f;
 
-    [Range(-10f, 0f)]
     [SerializeField]
+    [Range(-10f, 0f)]
     [Tooltip("This is the negative velocity")]
     private float _negativeVelocity = -10f;
 
-    [Range(0f, 10f)]
     [SerializeField]
+    [Range(0f, 10f)]
     [Tooltip("This is the positive velocity")]
     private float _positiveVelocity = 10f;
     
@@ -27,6 +28,9 @@ public class BirdController : MonoBehaviour
     private Animator _animator;
 
     private bool _isDead = false;
+
+    public event Action OnDeath;
+    public event Action Score;
 
     void Start()
     {
@@ -66,8 +70,11 @@ public class BirdController : MonoBehaviour
     {
         Vector3 position = _transform.position;
 
-        if (Mathf.Abs(position.y) > _camera.orthographicSize)
+        if (Mathf.Abs(position.y) > _camera.orthographicSize) 
+        { 
+            OnDeath?.Invoke();
             Debug.Log("Out of Screen");
+        }
     }
 
     void LimitVelocity() {
@@ -80,9 +87,17 @@ public class BirdController : MonoBehaviour
         if (_isDead) return; 
         if (collision.collider.CompareTag("Pipe")) 
         { 
-            _isDead = true; 
-            Debug.Log("Bird hit a pipe → DEAD"); 
-            GameManager.Instance.GameOver(); 
+            _isDead = true;
+            OnDeath?.Invoke();
         } 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_isDead) return;
+        if (collision.CompareTag("Score"))
+        {
+            Score?.Invoke();
+        }
     }
 }
