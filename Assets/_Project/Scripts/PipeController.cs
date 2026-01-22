@@ -4,27 +4,31 @@ public class PipeController : MonoBehaviour
 {
     [Header("Pipe Settings")]
 
-    [Range(1f, 10f)]
     [SerializeField]
+    [Range(1f, 10f)]
     [Tooltip("This is the move speed of the pipes")]
     private float _moveSpeed = 2f;
 
-    [Tooltip("This is the gap between the pipe")]
     [SerializeField] 
+    [Tooltip("This is the gap between the pipe")]
     private float _gap = 4f;
 
-    [Tooltip("This is the minimum height of center between the pipe , space included")]
     [SerializeField] 
+    [Tooltip("This is the minimum height of center between the pipe , space included")]
     private float _minCenterY = -6f;
 
-    [Tooltip("This is the maximum height of center between the pipe , space included")]
     [SerializeField] 
+    [Tooltip("This is the maximum height of center between the pipe , space included")]
     private float _maxCenterY = 6f;
+
 
     private Transform _pipeUp;
     private Transform _pipeDown;
 
-  
+    private Transform _scoreZone; 
+    private BoxCollider2D _scoreCollider;
+
+
     void Update()
     {
         MovePipe();
@@ -34,6 +38,9 @@ public class PipeController : MonoBehaviour
     {
         _pipeUp = transform.Find("PipeUp");
         _pipeDown = transform.Find("PipeDown");
+
+        _scoreZone = transform.Find("ScoreZone"); 
+        _scoreCollider = _scoreZone.GetComponent<BoxCollider2D>();
     }
 
     void MovePipe()
@@ -51,14 +58,7 @@ public class PipeController : MonoBehaviour
         _pipeUp.localPosition = new Vector2(0, centerY - _gap / 2f);
         _pipeDown.localPosition = new Vector2(0, centerY + _gap / 2f);
 
+        _scoreZone.localPosition = new Vector2(2.5f, centerY);
+        _scoreCollider.size = new Vector2(1f, _gap);
     }
-
-    //public void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Debug.Log("Bird Dead RIP");
-    //}
-    //public void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    Debug.Log("Bird Dead RIP");
-    //}
 }
