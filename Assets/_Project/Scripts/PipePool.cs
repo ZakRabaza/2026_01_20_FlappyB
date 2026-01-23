@@ -14,7 +14,7 @@ public class PipePool : MonoBehaviour
     private float _spawnInterval = 4f;
     
     [SerializeField] 
-    private float _spawnX = 10f; 
+    private float _spawnX = 16f; 
 
     private List<GameObject> _pipePool;
     
